@@ -23,6 +23,12 @@ body,html{
 .head-logo a{
 	display:block;
 	}
+.img-logo {
+	width: 160px;
+	top: 10px;
+	position: absolute;
+	left: 176px;
+}
 button.navig {
 	width: 36px;
 	height: 30px;
@@ -2061,4 +2067,7 @@ ul.social-slide li i.mac{
 	#filters li span {
 		font-size: 9px;
 		}
+}
+footer {
+	text-align: center;
 }

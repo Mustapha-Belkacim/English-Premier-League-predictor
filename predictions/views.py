@@ -11,6 +11,7 @@ class Index(View):
 
     def get(self, request):
         self.results = get_results(self.season)
+        #self.results = predict_season(self.season, self.model)
         return render(request, self.template_name, {'results'  :self.results,
                                                     'leadboard':self.leadboard})
 
