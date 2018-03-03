@@ -1,0 +1,26 @@
+{% load static %}
+<h4>Results</h4>
+<table class="table table-striped table-inverse">
+    <thead>
+        <tr>
+          <th>Week</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for week in results %}
+            <tr >
+                <th scope="row"></th>
+                {% for match in week %}
+                    <td >
+                        <img src="{{ match.homeLogo }}" class="img-circle" alt="Cinque Terre" width="30" height="30">
+                        <div>
+                            <button type="button" class="btn {{ match.result }} btn-circle"></button>
+                            <button type="button" class="btn btn-success btn-circle"></button>
+                        </div>
+                        <img src="{{ match.awayLogo }}" class="img-circle" alt="Cinque Terre" width="30" height="30">
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,60 @@
+<!-- banner -->
+<div id="home" class="banner">
+    <div class="container">
+        <div class="navi">
+                <div class="head-logo">
+                    {% load static %}
+                    <a href="index.html"><img src="{% static 'predictions/images/epl-logo.png' %}" alt=" "></a>
+                </div>
+                <div class="main-in">
+                    <section>
+                        <button id="showLeft" class="navig"></button>
+                    </section>
+                </div>
+
+
+                    <div class="cbp-spmenu-push">
+                        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+                            <h3>Menu</h3>
+                            <a href="#home" class="scroll">Home</a>
+                            <a href="#portfolio" class="scroll">Portfolio</a>
+                            <a href="#about" class="scroll">About Us</a>
+                            <a href="#contact" class="scroll">Contact</a>
+                        </nav>
+                </div>
+
+                <div class="clearfix"> </div>
+        </div>
+        <div class="banner-info">
+            <p>Master Cyber Security & Cybercriminality</p>
+            <div class="fig">
+                <span> </span>
+            </div>
+            <h3>OUR MISSION IS TO  <span> PREDICT</span></h3>
+            <div class="start">
+                <form text_aligh="center" method="POST"  class="form-inline">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <select name="model" class="form-control">
+                            <option value="1">SVC</option>
+                            <option value="2">X-BOOST</option>
+                            <option value="3">RandomForest</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select name="season" class="form-control">
+                            <option value="1">17/18</option>
+                            <option value="2">16/17</option>
+                            <option value="3">15/16</option>
+                            <option value="1">14/15</option>
+                            <option value="2">13/14</option>
+                            <option value="3">12/13</option>
+                         </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Predict</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //banner -->

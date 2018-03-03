@@ -1,3 +1,4 @@
+import random
 import pandas as pd
 import xgboost as xgb
 #the outcome (dependent variable) has only a limited number of possible values.
@@ -14,6 +15,11 @@ from sklearn.preprocessing import scale
 from sklearn.model_selection import train_test_split
 from time import time
 from sklearn.metrics import f1_score
+#for measuring training time
+from time import time
+from sklearn.metrics import f1_score
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import make_scorer
 
 # we want continous vars that are integers for our input data, so lets remove any categorical vars
 def preprocess_features(X):
@@ -72,15 +78,15 @@ def train_predict(clf, X_train, y_train, X_test, y_test):
     print("F1 score and accuracy score for training set: {:.4f} , {:.4f}.".format(f1, acc))
 
     f1, acc = predict_labels(clf, X_test, y_test)
-    print("F1 score and accuracy score for test set: {:.4f} , {:.4f}.".format(f1, acc))
+    print("F1 score and accuracy score for test set: {:.4f} , {:.4f}.\n\n".format(f1, acc))
 
 
 
-loc = "../static/predictions/Data/"
+loc = "../static/predictions/data/"
 # Read data and drop redundant column.
-data = pd.read_csv(loc + 'final_dataset.csv')
+"""data = pd.read_csv(loc + 'final_dataset.csv')
 
-X_all = data.drop(['FTR'],1)
+X_all = data.drop('FTR',1)
 y_all = data['FTR']
 
 #Center to the mean and component wise scale to unit variance
@@ -103,3 +109,98 @@ X_all = preprocess_features(X_all)
 # Shuffle and split the dataset into training and testing set.
 X_train, X_test, y_train, y_test = train_test_split(X_all, y_all, test_size = 50,
                                                     random_state = 2,stratify = y_all)
+
+# Initialize the three models (XGBoost is initialized later)
+clf_A = LogisticRegression(random_state = 42)
+clf_B = SVC(random_state = 912, kernel='rbf')
+#Boosting refers to this general problem of producing a very accurate prediction rule
+#by combining rough and moderately inaccurate rules-of-thumb
+clf_C = xgb.XGBClassifier(seed = 82)
+
+#train_predict(clf_A, X_train, y_train, X_test, y_test)
+#train_predict(clf_B, X_train, y_train, X_test, y_test)
+train_predict(clf_C, X_train, y_train, X_test, y_test)
+
+
+# Tuning the parameters of XGBoost.
+# Create the parameters list you wish to tune
+parameters = { 'learning_rate' : [0.1],
+               'n_estimators' : [40],
+               'max_depth': [3],
+               'min_child_weight': [3],
+               'gamma':[0.4],
+               'subsample' : [0.8],
+               'colsample_bytree' : [0.8],
+               'scale_pos_weight' : [1],
+               'reg_alpha':[1e-5]
+             }
+
+# Initialize the classifier
+clf = xgb.XGBClassifier(seed=2)
+
+# Make an f1 scoring function using 'make_scorer'
+f1_scorer = make_scorer(f1_score, pos_label='H')
+
+# Perform grid search on the classifier using the f1_scorer as the scoring method
+grid_obj = GridSearchCV(clf,
+                        scoring=f1_scorer,
+                        param_grid=parameters,
+                        cv=5)
+
+#  Fit the grid search object to the training data and find the optimal parameters
+grid_obj = grid_obj.fit(X_train, y_train)
+
+# Get the estimator
+clf = grid_obj.best_estimator_
+print(clf)
+
+# Report the final F1 score for training and testing after parameter tuning
+f1, acc = predict_labels(clf, X_train, y_train)
+print("F1 score and accuracy score for training set: {:.4f} , {:.4f}.".format(f1, acc))
+
+f1, acc = predict_labels(clf, X_test, y_test)
+print("F1 score and accuracy score for test set: {:.4f} , {:.4f}.".format(f1, acc))
+"""
+
+
+
+seasons = {'05/06' : [0, 380],
+           '06/07' : [380, 760],
+           '07/08' : [760, 1140],
+           '08/09' : [1140, 1520],
+           '09/10' : [1520, 1900],
+           '10/11' : [1900, 2280],
+           '11/12' : [2280, 2660],
+           '12/13' : [2660, 3040],
+           '13/14' : [3040, 3420],}
+results = {}
+
+def predict_season(season, model='svc'):
+    stats = pd.read_csv("/predictions/static/predictions/data/stats_for_seasons.csv") #loc + "stats_for_seasons.csv"
+    dilimiters = seasons[season]
+    season_games = stats[dilimiters[0] : dilimiters[1]]
+    season_games = season_games.drop(season_games[[0,13,14,15,16,17,18,19,20,21,22]], axis=1)
+    if model == 'svc':
+        train_classifier(clf_B, X_train, y_train)
+        y_pred = clf_B.predict(season_games)
+        print("\n\nseason_games:\n", season_games)
+        return season_games.to_dict()
+
+
+teams = ['Cardiff', 'Chelsea', 'Fulham', 'Crystal Palace', 'Hull', 'Everton', 'Liverpool', 'Newcastle', 'Man City', 'West Ham', 'Norwich', 'Arsenal', 'Southampton', 'Man United', 'Sunderland', 'Swansea', 'Tottenham', 'Aston Villa', 'West Brom', 'Stoke']
+
+res = ['btn-success', '']
+def get_results(season):
+    results=[]
+    for i in range(38):
+        Week = []
+        for i in range(10):
+            match = {'homeTeam' : random.choice(teams),
+             'homeLogo' : "/static/predictions/images/teams/"+random.choice(teams)+".png",
+             'awayTeam' : random.choice(teams),
+             'awayLogo' : "/static/predictions/images/teams/"+random.choice(teams)+".png",
+             'result' : random.choice(res)}
+            Week.append(match)
+        results.append(Week)
+    return results
+#predict_season('05/06')
