@@ -291,6 +291,7 @@ for year in range(2005, 2014):
 
 # Final data frame
 dataset = pd.concat(data_frames, ignore_index=True)
+dataset.to_csv(loc + "stats_for_seasons.csv")
 
 dataset['HTFormPtsStr'] = dataset['HM1'] + dataset['HM2'] + dataset['HM3'] + dataset['HM4'] + dataset['HM5']
 dataset['ATFormPtsStr'] = dataset['AM1'] + dataset['AM2'] + dataset['AM3'] + dataset['AM4'] + dataset['AM5']
@@ -336,4 +337,3 @@ testset = dataset[3040:]
 dataset.to_csv(loc + "final_dataset.csv")
 testset.to_csv(loc + "test.csv")
 
-print(testset)

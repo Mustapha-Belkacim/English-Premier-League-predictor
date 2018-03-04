@@ -23,6 +23,12 @@ body,html{
 .head-logo a{
 	display:block;
 	}
+.img-logo {
+	width: 160px;
+	top: 10px;
+	position: absolute;
+	left: 176px;
+}
 button.navig {
 	width: 36px;
 	height: 30px;
@@ -34,6 +40,15 @@ button.navig {
 	right: 16%;
 	top: 3.8%;
 	z-index: 9;
+}
+.btn-circle {
+  width: 14px;
+  height: 3px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 50%;
 }
 .navi {
 	padding-top: 2em;
@@ -131,7 +146,7 @@ button.navig {
 .begin-left{
 	padding:6em 0;
 	float:left;
-	width:45%;
+	width:70%;
 	}
 .begin-left h4{
 	color: #676F0A;
@@ -175,8 +190,8 @@ p.para1 span{
 	}
 .begin-right{
 	float:left;
-	width:50%;
-	margin-left: 4em;
+	width:20%;
+	margin-left: 8em;
 	}
 .begin-right img{
 	width:100%;
@@ -323,7 +338,7 @@ p.paragraph1 span{
 	-o-transition: all 0.5s;
 	-webkit-transition: all 0.5s;
 	visibility: hidden;
-	
+
 }
 .b-animate img{
 	margin-top:0;
@@ -462,13 +477,13 @@ ul#filters {
 		float:left;
 		overflow:hidden;
 	}
-	
+
 	.portfolio-wrapper {
 		overflow:hidden;
 		position: relative !important;
 		cursor:pointer;
 	}
-	
+
 	.portfolio img {
 		max-width:100%;
 		/*--position: relative;--*/
@@ -496,7 +511,7 @@ ul#filters {
 			z-index:500;
 			padding:5px 8px;
 		}
-			
+
 			.portfolio .text-category {
 				display:block;
 				font-size:9px;
@@ -1147,7 +1162,7 @@ ul.social-slide li i.mac{
 	bottom: 0px;
 	right: 2%;
 	overflow: hidden;
-	z-index: 999; 
+	z-index: 999;
 	width: 32px;
 	height: 32px;
 	border: none;
@@ -1829,7 +1844,7 @@ ul.social-slide li i.mac{
 }
 @media (max-width: 320px)
 {
-	
+
 	p.para {
 		font-size: 13px;
 		}
@@ -2052,4 +2067,7 @@ ul.social-slide li i.mac{
 	#filters li span {
 		font-size: 9px;
 		}
+}
+footer {
+	text-align: center;
 }

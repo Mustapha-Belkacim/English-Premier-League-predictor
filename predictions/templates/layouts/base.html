@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../Search-icon.png">
+
+    <title>English premier league predictor</title>
+
+    {% block styles %}
+      {% load static %}
+      <!-- Bootstrap core CSS -->
+      <link href="{% static 'predictions/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+      <!-- additional fonts -->
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+
+      <!-- Font awsome -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% endblock %}
+
+
+  </head>
+
+  <body>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% block scripts %}
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+      {% load static %}
+
+      <script src="{% static 'predictions/js/jquery.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'predictions/js/move-top.js' %}"></script>
+      <script type="text/javascript" src="{% static 'predictions/js/easing.js' %}"></script>
+      <script src="{% static 'predictions/js/modernizr.custom.js' %}"></script>
+
+    {% endblock%}
+    <footer>
+        <div class="inner">
+            <p>Made with <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i> by <a href="https://github.com/Mustapha-Belkacim">@Mustapha</a>.</p>
+        </div>
+    </footer>
+  </body>
+</html>
